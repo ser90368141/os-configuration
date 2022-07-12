@@ -1,0 +1,13 @@
+[user]
+  email = s.nesterenko@integrasources.com
+  name = Sergey Nesterenko
+[core]
+  editor = nano
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true
+[submodule]
+	recurse = true
+[rebase]
+	autoSquash = true
