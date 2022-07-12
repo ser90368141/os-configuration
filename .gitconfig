@@ -1,8 +1,8 @@
 [user]
-  email = s.nesterenko@integrasources.com
-  name = Sergey Nesterenko
+	email = s.nesterenko@integrasources.com
+	name = Sergey Nesterenko
 [core]
-  editor = nano
+	editor = nano
 [init]
 	defaultBranch = main
 [pull]
