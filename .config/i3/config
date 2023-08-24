@@ -16,16 +16,18 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-exec_always xrandr --output DVI-D-1 --auto --output HDMI-1 --auto --panning 1920x1080+1920+0 --right-of DVI-D-1 --output VGA-1 --auto --panning 1920x1080+3840+0 --right-of HDMI-1
+exec_always --no-startup-id xrandr --output DVI-D-1 --auto --output HDMI-1 --auto --panning 1920x1080+1920+0 --right-of DVI-D-1 --output VGA-1 --auto --panning 1920x1080+3840+0 --right-of HDMI-1
 exec_always "setxkbmap -layout us,ru -option grp:alt_shift_toggle"
-# exec_always --no-startup-id convert -resize $(xdpyinfo | grep dimensions | cut -d\  -f7 | cut -dx -f1) ~/Pictures/wp/$(ls --hide lockscreen.png ~/Pictures/wp | sort -R | head -n 1) ~/Pictures/wp/lockscreen.png
-exec_always --no-startup-id convert -resize 5760x1080\! ~/Pictures/wp/$(ls --hide lockscreen.png ~/Pictures/wp | sort -R | head -n 1) ~/Pictures/wp/lockscreen.png
-exec --no-startup-id feh --randomize --bg-fill ~/Pictures/wp/*
+exec --no-startup-id variety --profile /home/sergey/.config/variety
 exec --no-startup-id dunst
-# exec --no-startup-id picom -b
+exec --no-startup-id picom -b
 exec --no-startup-id nm-applet
+exec --no-startup-id gxkb
 
-bindsym $mod+l exec --no-startup-id i3lock -i ~/Pictures/wp/lockscreen.png
+bindsym $mod+l exec convert -resize $(xdpyinfo | grep dimensions | cut -d\  -f7)! \
+                      ~/Pictures/wp/$(ls ~/Pictures/wp | sort -R | head -n 1) RGB:- \
+                    | i3lock -t -e -f --raw $(xdpyinfo | grep dimensions | cut -d\  -f7):rgb -i /dev/stdin
+                                        
 bindsym --release $mod+Shift+S exec --no-startup-id scrot -s $HOME/Pictures/screenshot-%Y-%m-%d-%H:%M:%S.png -e 'xclip -selection clipboard -t image/png -i $f'
 bindsym Print exec --no-startup-id scrot $HOME/Pictures/screenshot-%Y-%m-%d-%H:%M:%S.png -e 'xclip -selection clipboard -t image/png -i $f'
 bindsym Control+Print exec --no-startup-id scrot -ub $HOME/Pictures/screenshot-%Y-%m-%d-%H:%M:%S.png -e 'xclip -selection clipboard -t image/png -i $f'
